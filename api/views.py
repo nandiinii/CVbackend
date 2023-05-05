@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics,mixins,viewsets,status
-from .models import User
-from .serializers import UserSerializer,RegisterSerializer
+from .models import User,ApplicantDetails
+from .serializers import UserSerializer,RegisterSerializer,ApplicantDetailsSerializer
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken,AccessToken
 from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
@@ -27,3 +27,7 @@ class LoggedInUserView(APIView):
 class RegisterView(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.RetrieveModelMixin,mixins.ListModelMixin):
     serializer_class=RegisterSerializer
     queryset=User.objects.all()   
+
+class ApplicantDetailsRegister(generics.CreateAPIView):
+    serializer_class=ApplicantDetailsSerializer
+    queryset=ApplicantDetails.objects.all()

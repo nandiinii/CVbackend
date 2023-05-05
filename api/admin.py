@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User
+from .models import User, ApplicantDetails
 from django.contrib.auth.admin import UserAdmin
 from django.forms import TextInput, Textarea, CharField
 from django import forms
@@ -30,4 +30,4 @@ class UserAdminConfig(UserAdmin):
 
 
 admin.site.register(User)
-
+admin.site.register(ApplicantDetails)

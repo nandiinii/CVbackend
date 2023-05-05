@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, ApplicantDetails
 from rest_framework.permissions import IsAuthenticated
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -24,4 +24,20 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
         fields=['id','username','email']
+
+class ApplicantDetailsSerializer(serializers.ModelSerializer):
+    def validate(self,data):
+        Name=data['Name']
+        DOB=data['DOB']
+        Location=data['Location']
+        Gender=data['Gender']
+        JobRole=data['JobRole']
+        PhoneNo=data['PhoneNo']
+        EmailID=data['EmailID']
+        LinkedIn=data['LinkedIn']
+        return data
+    
+    class Meta:
+        model=ApplicantDetails
+        fields='__all__'
 
