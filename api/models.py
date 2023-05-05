@@ -44,33 +44,23 @@ class User(AbstractBaseUser,PermissionsMixin):
     def tokens(self):
         return ''
 
-    
+   
 class ApplicantDetails(models.Model):
-        Name=models.CharField(blank=False, max_length=50)
-        DOB=models.DateField(blank=False,auto_now=False, auto_now_add=False)
-        Location=models.CharField(blank=False, max_length=50)
-        JobRole=models.CharField( blank=False,max_length=50)
-        GENDER_CHOICES=(
-             ('Male','Male'),
-             ('Female','Female'),
-             ('Others','Others')
-        )
-        Gender=models.CharField(blank=False,max_length=6, choices=GENDER_CHOICES)
         PhoneNo=models.CharField(blank=False,max_length=10)
         EmailID=models.EmailField(blank=False,max_length=254)
         LinkedIn=models.CharField(blank=False, max_length=100)
         ResumeFile=models.FileField(upload_to="", max_length=100)
         def __str__(self):
-          return self.Name
+          return self.LinkedIn
 
 class DetailAdd(models.Model):
-     name=models.CharField(max_length=25)
+     name=models.ForeignKey(User,max_length=25,blank=False,on_delete=models.CASCADE)
      dob=models.DateField()
      location=models.CharField(max_length=25)
      GENDER_CHOICES=(
         ('Male','Male'),
         ('Female','Female'), )
      gender=models.CharField(max_length=6,choices=GENDER_CHOICES)
-
      def _str_(self):
         return self.name
+

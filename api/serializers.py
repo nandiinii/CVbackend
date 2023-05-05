@@ -27,22 +27,16 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ApplicantDetailsSerializer(serializers.ModelSerializer):
     def validate(self,data):
-        Name=data['Name']
-        DOB=data['DOB']
-        Location=data['Location']
-        Gender=data['Gender']
-        JobRole=data['JobRole']
         PhoneNo=data['PhoneNo']
         EmailID=data['EmailID']
         LinkedIn=data['LinkedIn']
         return data
-
-class DetailAddSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=DetailAdd
-        fields=['name','dob','location','gender']
     
     class Meta:
         model=ApplicantDetails
         fields='__all__'
 
+class DetailAddSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=DetailAdd
+        fields=['name','dob','location','gender']
