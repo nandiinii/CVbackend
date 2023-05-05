@@ -62,3 +62,15 @@ class ApplicantDetails(models.Model):
         ResumeFile=models.FileField(upload_to="", max_length=100)
         def __str__(self):
           return self.Name
+
+class DetailAdd(models.Model):
+     name=models.CharField(max_length=25)
+     dob=models.DateField()
+     location=models.CharField(max_length=25)
+     GENDER_CHOICES=(
+        ('Male','Male'),
+        ('Female','Female'), )
+     gender=models.CharField(max_length=6,choices=GENDER_CHOICES)
+
+     def _str_(self):
+        return self.name

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, ApplicantDetails
+from .models import User, ApplicantDetails,DetailAdd
 from rest_framework.permissions import IsAuthenticated
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -36,6 +36,11 @@ class ApplicantDetailsSerializer(serializers.ModelSerializer):
         EmailID=data['EmailID']
         LinkedIn=data['LinkedIn']
         return data
+
+class DetailAddSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=DetailAdd
+        fields=['name','dob','location','gender']
     
     class Meta:
         model=ApplicantDetails
