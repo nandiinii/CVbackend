@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import User, ApplicantDetails,DetailAdd
+from .models import User, ApplicantDetails,DetailAdd, DetailAddtwo
 from rest_framework.permissions import IsAuthenticated
+from django.core.validators import FileExtensionValidator
 
 class RegisterSerializer(serializers.ModelSerializer):
     password=serializers.CharField(max_length=68,min_length=6,write_only=True)
@@ -40,3 +41,21 @@ class DetailAddSerializer(serializers.ModelSerializer):
     class Meta:
         model=DetailAdd
         fields=['name','dob','location','gender']
+
+class DetailAddTwoSerializer(serializers.ModelSerializer):
+    resume = serializers.FileField(validators = [FileExtensionValidator(allowed_extensions=['pdf'])])
+    class Meta:
+        model = DetailAddtwo
+        fields='__all__'
+    def to_representation(self, instance):
+        if isinstance(instance, DetailAddtwo):
+            return {
+                'mailid': instance.mailid,
+                'phoneno': instance.phoneno,
+                'linked_in_url': instance.linked_in_url,
+                'job_role': instance.job_role,
+                'resume': instance.resume.url if instance.resume else None,
+                'img': instance.img.url if instance.img else None
+            }
+        else:
+            return instance

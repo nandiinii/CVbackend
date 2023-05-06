@@ -1,6 +1,7 @@
 from django.db import models
 from email.policy import default
-from django.contrib.auth.models import (AbstractBaseUser,BaseUserManager,PermissionsMixin)
+from django.contrib.auth.models import (AbstractBaseUser,BaseUserManager,PermissionsMixin,User)
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -46,10 +47,12 @@ class User(AbstractBaseUser,PermissionsMixin):
 
    
 class ApplicantDetails(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applicant_details', default=None)
         PhoneNo=models.CharField(blank=False,max_length=10)
         EmailID=models.EmailField(blank=False,max_length=254)
         LinkedIn=models.CharField(blank=False, max_length=100)
         ResumeFile=models.FileField(upload_to="", max_length=100)
+
         def __str__(self):
           return self.LinkedIn
 
@@ -64,3 +67,13 @@ class DetailAdd(models.Model):
      def _str_(self):
         return self.name
 
+class DetailAddtwo(models.Model):
+    mailid = models.CharField(max_length=25)
+    phoneno = models.CharField(max_length=10)
+    linked_in_url = models.URLField(max_length=50)
+    job_role = models.CharField(max_length=20)
+    resume = models.FileField(upload_to='',validators = [FileExtensionValidator(allowed_extensions=['pdf'])])
+    img = models.ImageField(upload_to='images',blank=True,null=True)
+
+    def __str__(self):
+        return self.mailid
