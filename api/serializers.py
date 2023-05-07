@@ -36,13 +36,15 @@ class ApplicantDetailsSerializer(serializers.ModelSerializer):
         EmailID=data['EmailID']
         LinkedIn=data['LinkedIn']
         return data
+    
+    class Meta:
+        model=ApplicantDetails
+        fields='__all__'
+
 
 class DetailAddSerializer(serializers.ModelSerializer):
     class Meta:
         model=DetailAdd
         fields=['name','dob','location','gender']
     
-    class Meta:
-        model=ApplicantDetails
-        fields='__all__'
-
+    
