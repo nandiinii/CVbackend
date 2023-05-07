@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import InputData
+from .models import InputData,Question
 
 
 class PersonalitySerializer(serializers.ModelSerializer):
@@ -18,3 +18,14 @@ class PersonalitySerializer(serializers.ModelSerializer):
                 model=InputData
                 fields='__all__'
 
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = '__all__'
+    
+class AptitudeTestSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Question
+        fields = ['id', 'question', 'option1', 'option2', 'option3', 'option4','entered_answer','answer']

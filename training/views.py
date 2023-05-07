@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from numpy import *
 from rest_framework.decorators import action
-from .models import InputData
+from .models import InputData,Question
 from rest_framework.response import Response
 from rest_framework import status,generics,mixins,viewsets
-from .serializers import PersonalitySerializer
+from .serializers import PersonalitySerializer,AptitudeTestSerializer,QuestionSerializer
 from sklearn.preprocessing import LabelEncoder
 import pickle
 from django.core import serializers
@@ -63,3 +63,24 @@ class PersonalityViewSet(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.
         return Response(data)
    
 
+#Aptitude Test
+
+class AptitudeTest(generics.CreateAPIView):
+    serializer_class=QuestionSerializer
+    queryset=Question.objects.all()  
+    
+class QuestionListView(generics.RetrieveAPIView):
+    queryset = Question.objects.all()
+    serializer_class = AptitudeTestSerializer   
+
+    
+class ScoreView(generics.GenericAPIView):
+
+    def get(self, request):
+        questions = Question.objects.all()
+        serializer = AptitudeTestSerializer(questions, many=True)
+        score = 0
+        for data in serializer.data:
+            if data['entered_answer'] == data['answer']:
+                score += 1
+        return Response({'score': score})
