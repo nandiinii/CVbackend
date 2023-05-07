@@ -47,11 +47,11 @@ class User(AbstractBaseUser,PermissionsMixin):
 
    
 class ApplicantDetails(models.Model):
-        user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applicant_details', default=None)
+        # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applicant_details', default=None)
         PhoneNo=models.CharField(blank=False,max_length=10)
         EmailID=models.EmailField(blank=False,max_length=254)
         LinkedIn=models.CharField(blank=False, max_length=100)
-        ResumeFile=models.FileField(upload_to="", max_length=100)
+        ResumeFile=models.FileField(upload_to="", validators = [FileExtensionValidator(allowed_extensions=['pdf'])])
 
         def __str__(self):
           return self.LinkedIn
