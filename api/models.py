@@ -2,7 +2,7 @@ from django.db import models
 from email.policy import default
 from django.contrib.auth.models import (AbstractBaseUser,BaseUserManager,PermissionsMixin,User)
 from django.core.validators import FileExtensionValidator
-# Create your models here.
+import uuid
 
 class UserManager(BaseUserManager):
     def create_user(self,username,email,password=None):
@@ -57,7 +57,8 @@ class ApplicantDetails(models.Model):
           return self.LinkedIn
 
 class DetailAdd(models.Model):
-     name=models.ForeignKey(User,max_length=25,blank=False,on_delete=models.CASCADE)
+     #id = models.AutoField(primary_key=True)
+     name=models.CharField(max_length=25,blank=False)
      dob=models.DateField()
      location=models.CharField(max_length=25)
      GENDER_CHOICES=(

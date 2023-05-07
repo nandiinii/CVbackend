@@ -5,11 +5,13 @@ from .views import BlacklistTokenView,LoggedInUserView,RegisterView,ApplicantDet
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import CandidateDetails
 
 
 router=DefaultRouter()
 router.register('register',RegisterView,basename='register')
 router.register('detail-add',DetailAddView,basename='detail-add')
+
 
 my_viewset = ResumeScannerView.as_view({
     'post': 'create',
@@ -23,6 +25,7 @@ urlpatterns = [
     path('api/token/blacklist/',BlacklistTokenView.as_view(),name="blacklist"),
     path('current-user/', LoggedInUserView.as_view(), name='currentuser'),
     path('applicant-details-register/', ApplicantDetailsRegister.as_view(), name='applicant-details-register'),
-    path('resume-analyze/', my_viewset, name = "resume_analyze")
+    path('resume-analyze/', my_viewset, name = "resume_analyze"),
+    path('profile/<int:pk>',CandidateDetails.as_view())
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 

@@ -3,7 +3,7 @@ from django.conf import settings
 from rest_framework import generics,mixins,viewsets,status
 from django.core import serializers
 from .models import User,ApplicantDetails,DetailAdd,DetailAddtwo
-from .serializers import UserSerializer,RegisterSerializer,ApplicantDetailsSerializer,DetailAddSerializer,DetailAddTwoSerializer
+from .serializers import UserSerializer,RegisterSerializer,ApplicantDetailsSerializer,DetailAddSerializer,DetailAddTwoSerializer,CandidateSerializer
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken,AccessToken
 from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
@@ -22,6 +22,12 @@ import matplotlib
 import PyPDF2
 import os
 
+
+class CandidateDetails(generics.RetrieveAPIView):
+    serializer_class = CandidateSerializer
+    queryset = DetailAdd.objects.all()
+
+   
 
 matplotlib.use('Agg')
 nlp = spacy.load('en_core_web_sm')

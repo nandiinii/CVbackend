@@ -40,7 +40,12 @@ class ApplicantDetailsSerializer(serializers.ModelSerializer):
 class DetailAddSerializer(serializers.ModelSerializer):
     class Meta:
         model=DetailAdd
-        fields=['name','dob','location','gender']
+        fields=['id','name','location','dob','gender']
+        #fields='__all__'
+class CandidateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=DetailAdd
+        fields=['name','location']        
 
 class DetailAddTwoSerializer(serializers.ModelSerializer):
     resume = serializers.FileField(validators = [FileExtensionValidator(allowed_extensions=['pdf'])])
@@ -59,5 +64,3 @@ class DetailAddTwoSerializer(serializers.ModelSerializer):
             }
         else:
             return instance
-
-        
