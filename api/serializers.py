@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, ApplicantDetails,DetailAdd, DetailAddtwo,Question
+from .models import User, ApplicantDetails,DetailAdd, DetailAddtwo
 from rest_framework.permissions import IsAuthenticated
 from django.core.validators import FileExtensionValidator
 
