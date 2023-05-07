@@ -14,3 +14,14 @@ class InputData(models.Model):
     Label=models.CharField(max_length=20,default="Personality Not predicted",null=True)
     def __str__(self):
         return self.name
+    
+class Question(models.Model):
+    question = models.TextField()
+    option1 = models.TextField()
+    option2 = models.TextField()
+    option3 = models.TextField()
+    option4 = models.TextField()
+    answer = models.IntegerField(choices=[(1,1), (2,2), (3,3), (4,4)])
+    entered_answer=models.IntegerField(default=0)    
+    def __str__(self):
+        return self.question

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, ApplicantDetails,DetailAdd, DetailAddtwo
+from .models import User, ApplicantDetails,DetailAdd, DetailAddtwo,Question
 from rest_framework.permissions import IsAuthenticated
 from django.core.validators import FileExtensionValidator
 
@@ -59,3 +59,5 @@ class DetailAddTwoSerializer(serializers.ModelSerializer):
             }
         else:
             return instance
+
+        

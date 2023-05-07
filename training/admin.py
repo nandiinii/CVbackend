@@ -1,8 +1,8 @@
-from django.contrib import admin
 
-# Register your models here.
 from django.contrib import admin
-from .models import InputData
+from .models import InputData,Question
 
-# Register your models here.
+
 admin.site.register(InputData)
+admin.site.register(Question)
+
