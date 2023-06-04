@@ -61,10 +61,10 @@ class PersonalityViewSet(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.
         data = serializers.serialize('json', [my_model, ])
         return Response(data)
    
-    def retrieve(self,request,pk = None):
-        instance = self.get_object()  # Retrieve the InputData object based on the provided ID
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+    # def retrieve(self,request,pk = None):
+    #     instance = self.get_object()  # Retrieve the InputData object based on the provided ID
+    #     serializer = self.get_serializer(instance)
+    #     return Response(serializer.data)
 
 
 #Aptitude Test
